@@ -9,7 +9,6 @@ def checkInput(choice):
             session_time = int(input("Enter number of minutes for each session:")) * 60
         elif int(editChoice) == 2:
             break_time = int(input("Enter number of minutes for each break session:")) * 60
-
 session_count = 1 # number of sessions continuously tracked.
 session_time = 5 * 60 # Number of minutes to work.
 break_time = 1 * 60 # Number of minutes break.
@@ -29,11 +28,11 @@ if choice == '':
 
 while int(choice) != 0 or choice != 'q':
     checkInput(choice)
-    print(f'Starting session {session_count} of {session_time / 60} minutes')
+    print(f'Starting session {session_count} of {session_time // 60} minutes')
     notif_startSession.build().show()
     time.sleep(session_time)
 
-    print(f'Starting break of {break_time / 60} minutes')
+    print(f'Starting break of {break_time // 60} minutes')
     session_count += 1
     notif_startBreak.build().show()
     time.sleep(break_time)
