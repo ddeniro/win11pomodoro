@@ -47,16 +47,13 @@ try:
 
         #Start the Pomodoro work session
         notif_startSession.build().show()
-        systray.update(hover_text='Work Session')
+        systray.update(hover_text=f'Work Session {session_count}')
         time.sleep(session_time)
-
-        
-        session_count += 1
 
         #Start break session
         notif_startBreak.build().show()
-        systray.update(hover_text='Break Session')
-
+        systray.update(hover_text=f'Break Session {session_count}')
+        session_count += 1
         notif_startBreak.title = f"Work session {session_count} ended!"
         notif_startSession.title=f"Work session {session_count} started."
         time.sleep(break_time)
