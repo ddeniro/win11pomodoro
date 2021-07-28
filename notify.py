@@ -2,6 +2,16 @@ from winotify import Notification, audio
 import time, sys, os
 import pkg_resources
 from infi.systray import SysTrayIcon
+from configparser import ConfigParser
+
+def readConfig():
+    config = ConfigParser()
+    config.read('notify.cfg')
+    session_time = float(config.get('config', 'session_time'))
+    break_time = float(config.get('config', 'break_time'))
+    return session_time * 60, break_time * 60
+
+session_time, break_time = readConfig()
 
 def say_hello(systray):
     print("Hello, World!")
@@ -14,15 +24,11 @@ def onQuit(systray):
 def testing():
     pass
 
+
 menu_options = (("Say Hello", None, say_hello),
                 ("testing", None, testing))
 
-session_times = [5, 15, 30, 45, 60]
-break_times = [1, 2.5, 5, 10]
-
 session_count = 1 # number of sessions continuously tracked.
-session_time = 5 * 60 # Number of minutes to work.
-break_time = 1 * 60 # Number of minutes break.
 
 #Create each of our notifcation objects to send to Desktop using winotify library.
 
@@ -43,6 +49,7 @@ try:
         notif_startSession.build().show()
         systray.update(hover_text='Work Session')
         time.sleep(session_time)
+
         
         session_count += 1
 
